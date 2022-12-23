@@ -9,6 +9,7 @@ import CheckoutForm from './CheckoutForm';
 import { useSelector } from 'react-redux';
 import ProductDetail from './ProductDetail';
 import Cart from './Cart';
+import Footer from './Footer';
 
 const Navbar = () => {
     const cartItems = useSelector((state) => state.cartItems.cartproducts);
@@ -59,7 +60,9 @@ const Navbar = () => {
             <Route path="/product/:productId" element={<ProductDetail/>}></Route>
             <Route path="*" element={<PageNotFound/>}></Route>
         </Routes>
+        <Footer/>
         </BrowserRouter>
+        
     );
 }
 

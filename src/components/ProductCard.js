@@ -14,7 +14,8 @@ export const ProductCard = (props) =>{
                     <div className="price">${price}</div>
                     <button 
                     onClick={() => props.onAddToCart(props.product)}
-                    className="btn btn-default">Add To Cart</button>
+                    className="btn btn-default">
+                    <i className="fa fa-cart-plus"></i> Add To Cart</button>
                 </div>
             </div>
         </>

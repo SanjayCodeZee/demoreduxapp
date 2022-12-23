@@ -15,7 +15,9 @@ const Home = () => {
 
     useEffect(()=> {
         //console.log('load page');
+        setLoading(true);
         dispatch(fetchProducts()); //dispatch action onload page 
+        setLoading(false);
         getCategories();
     },[]) 
   
@@ -49,29 +51,29 @@ const Home = () => {
 
     return(
         <>
-        <div className="container">
-            <div className="row filters-row">
-                <div className="filters">
-                    <div className="filter-box">
-                        {categories.length ?
-                        <select className="form-control">
-                            <option>--Select Category--</option>
-                            {categories.map((category,i) => {
-                                return <option key={i} value={category}>{category.toUpperCase()}</option>
-                            })}
-                        </select>:''}
+            <div className="container">
+                <div className="row filters-row">
+                    <div className="filters">
+                        <div className="filter-box">
+                            {categories.length ?
+                            <select className="form-control">
+                                <option>--Select Category--</option>
+                                {categories.map((category,i) => {
+                                    return <option key={i} value={category}>{category.toUpperCase()}</option>
+                                })}
+                            </select>:''}
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="products">
+                        {loading?<div>Loading...</div>:''}
+                        {products?.map((product) => {  
+                        return <ProductCard product={product} key={product.id} onAddToCart={onAddToCart} />
+                        })}
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="products">
-                    {loading?<div>Loading...</div>:''}
-                    {products?.map((product) => {  
-                    return <ProductCard product={product} key={product.id} onAddToCart={onAddToCart} />
-                    })}
-                </div>
-            </div>
-        </div>
         </>
     )
 }

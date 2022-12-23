@@ -192,7 +192,7 @@ const CheckoutForm = () => {
                             <div className="form-section-label"><h5>Credit Card</h5></div>
                             <div className="form-section-label"><h5>Debit Card</h5></div>
                         </div>
-                        <button type="submit" className="btn btn-primary btn-block mb-4">Place order</button>
+                        <button type="submit" className="btn btn-primary">Place order</button>
                     </Form>
                 </div>
                 )

@@ -44,6 +44,7 @@ export default function Login() {
     
     return (
         <>
+        <section className="login-wrapper">
             <div className="container">
                 <div className="row">
                     <h1>Login</h1>            
@@ -76,9 +77,10 @@ export default function Login() {
                         </div>
                         <button type="submit">Submit</button>
                     </form>
-                    <div className="row"><Link to="/register" className="link-form">Create Account Here</Link></div>
+                    <div className="row"><Link to="/register" className="link-form">Create Account</Link></div>
                 </div>
             </div>
+        </section>
         </>
     );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeFromCart } from "../services/actions/actions";
 
 export const Cart = () =>{
@@ -39,6 +40,7 @@ export const Cart = () =>{
 
     return (
         <>
+        <section className="shop-wrapper">
             <div className="container">
                 <div className="row">
                     <div className="col-md-9 offset-col-md-3" >
@@ -96,10 +98,14 @@ export const Cart = () =>{
                             <div className="col">TOTAL PRICE</div>
                             <div className="col text-right">&euro; {cartTotal}</div>
                         </div>
-                        <button className="btn btn-default">CHECKOUT</button>
+                        <Link
+                        to="/checkout"
+                        className="btn btn-default"
+                        >CHECKOUT</Link>
                     </div>                      
                 </div>
             </div>
+            </section>
         </>
     )
 

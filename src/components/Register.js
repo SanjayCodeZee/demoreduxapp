@@ -45,9 +45,13 @@ export default function Register() {
         <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-            console.log(values);
-
+        onSubmit={(values, {resetForm}) => {
+                console.log(values);
+                const userList = JSON.parse(localStorage.getItem("userlists")) || [];
+                userList.push(values); 
+                console.log("userList ", userList);
+                localStorage.setItem("userlists",JSON.stringify(userList));
+                resetForm({values: ''});
             }
         }
          >
