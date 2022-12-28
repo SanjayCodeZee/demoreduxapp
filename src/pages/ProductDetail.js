@@ -49,10 +49,12 @@ export const ProductDetail = (props) =>{
                     </div>
                 </div>
             </div>
-            </section>
+        </section>
         </>
     )
 
 } 
 
 export default ProductDetail;
+
+

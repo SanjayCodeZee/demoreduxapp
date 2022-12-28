@@ -6,7 +6,7 @@ export const ProductCard = (props) =>{
     const{id,image,title,category,price } = props.product; 
     return (
         <>
-            <div className="col-md-3 product" key={id}>
+            <div className="col-md-4 mt-5" key={id}>
                 <img src={image} />
                 <div className="product-details">
                     <Link to={`product/${id}`}>{title}</Link>

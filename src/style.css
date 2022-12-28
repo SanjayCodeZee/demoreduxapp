@@ -27,19 +27,18 @@ span.logotext{
 }
 
 .products {
-    display: grid;
-    gap: 50px;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
-.product {
+/* .product {
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     width: auto;
-}
+} */
 
 img {
     height: 200px;
@@ -52,6 +51,7 @@ img {
     flex-direction: column;
     margin-top: 10px;
     text-align: center;
+    align-items: center;
     font-weight: 400;
 }
 .product-details a, .product-details .price{
@@ -82,9 +82,10 @@ div.form-group{
 
 .bannerdetail{
     position: absolute;
-    top: 6vh;
+    top: 10vh;
     font-weight: 800;
     right: 50%;
+    color: white;
 }
 
 .form-control {
@@ -150,16 +151,16 @@ a.link-form{
 }
 
 .btn-default{
-    padding: 5px 10px;
+    padding: 10px 15px;
     background-color: black;
     color: white;
     border-radius: 0;
-    width: 100%;
+    width: auto;
     font-size: 0.7rem;
     margin-top: 4vh;
     padding: 1vh;
-    font-weight: 800;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 .btn-default:hover{
@@ -182,27 +183,36 @@ background-color: #c67605;
 }
   
 #lblCartCount {
-    font-size: 12px;
-    background: #ff0000;
-    color: #fff;
-    padding: 0 5px;
-    vertical-align: top;
-    margin-left: -5px; 
+  font-size: 12px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -5px; 
 }
 
 .cart-table-title{
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #212529;
 }
 
 .cart-table-title h5, .cart-table-title span{
-    font-weight: 800;
-    color: black;
+  font-weight: 800;
+  color: black;
+}
 
+.cart-item-list h6{
+  font-weight: 800;
+  color: #a57b7b;
 }
 
 .shop-wrapper{
     padding: 100px 0;
+}
+
+.home-detail-wrapper{
+  padding: 200px 0 200px 0;
 }
 
 .product-detail-wrapper{
@@ -271,6 +281,7 @@ background-color: #c67605;
   .text-uppercase{
     font-weight: 800 !important;
     font-size: 18px;
+    color: white;
   }
 
   .product-image{
@@ -280,3 +291,35 @@ background-color: #c67605;
   .product-info-wrap div{
     font-weight: 800;
   }
+
+  p i.fa {
+    color: white;
+    font-size: 20px;
+}
+  
+#overlay{
+    position:fixed;
+    z-index:99999;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgba(0,0,0,0.9);
+    transition: 1s 0.4s;
+  }
+
+  #progstat{
+    font-size:0.7em;
+    letter-spacing: 3px;
+    position:absolute;
+    top:50%;
+    margin-top:-40px;
+    width:100%;
+    text-align:center;
+    color:#fff;
+  }
+
+.banner{
+  background: #a57b7b;
+  height: 25vh;
+}

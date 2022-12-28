@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART,SET_PRODUCTS } from "../reduxConstant"
+import { ADD_TO_CART, REMOVE_FROM_CART,SET_PRODUCTS, USER_LOGIN } from "../reduxConstant"
 
 export const addToCart = (products) =>{
     return {
@@ -27,11 +27,35 @@ export const fetchProducts = () =>{
     }
 }
 
+export const fetchByCategoryProducts = (category) =>{
+    return async function (dispatch) { 
+        //Redux thunk middleware call this function use dispatch as first argument
+        const url = `https://fakestoreapi.com/products/category/${category}`;
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            //console.log(json);
+            dispatch(setProducts(json)) 
+        } catch (e) {
+            console.log("error handling");
+        }
+    }
+}
+
+
 // Note :  fetchProducts() ma dispatch action kre che setProduct and 
 
 export const setProducts = (products) =>{
     return {
         type : SET_PRODUCTS,
         payload : products
+    }
+}
+
+
+export const userLogin = (user) => {
+    return {
+        type: USER_LOGIN,
+        payload: user
     }
 }

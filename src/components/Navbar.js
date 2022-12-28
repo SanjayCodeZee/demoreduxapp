@@ -1,18 +1,23 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link, NavLink  } from 'react-router-dom';
-import Home from './Home';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link, NavLink,Navigate  } from 'react-router-dom';
+import Home from '../pages/Home';
 import Blog from './Blog';
-import Login from './Login';
-import Register from './Register';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
 import Banner from './Banner';
-import CheckoutForm from './CheckoutForm';
+import CheckoutForm from '../pages/CheckoutForm';
 import { useSelector } from 'react-redux';
-import ProductDetail from './ProductDetail';
-import Cart from './Cart';
+import ProductDetail from '../pages/ProductDetail';
+import Cart from '../pages/Cart';
 import Footer from './Footer';
+import Shop from '../pages/Shop';
 
 const Navbar = () => {
     const cartItems = useSelector((state) => state.cartItems.cartproducts);
+    const authUser = useSelector((state) => state.authUser);
+    console.log('author',authUser);
+    const [isLogin, setIsLogin] = useState(localStorage.getItem("authenticated") || false);
+
     return (
         <BrowserRouter>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,14 +33,16 @@ const Navbar = () => {
                             <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                            <NavLink className="nav-link" to="/blog">Blog</NavLink>
+                            <NavLink className="nav-link" to="/shop">Shop</NavLink>
                             </li>
                             <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            {!isLogin ?
+                            <NavLink className="nav-link" to="/login">Login</NavLink>:
+                            <NavLink className="nav-link" to="/login">Logout</NavLink>}
                             </li>
-                            <li className="nav-item">
+                            {!isLogin?<li className="nav-item">
                             <NavLink className="nav-link" to="/register">Register</NavLink>
-                            </li>
+                            </li>:''}
                             <li className="nav-item">
                             <NavLink className="nav-link" to="/cart">
                                 <i className="fa fa-shopping-basket">
@@ -52,11 +59,12 @@ const Navbar = () => {
         <Banner/>
         <Routes>
             <Route path="/" exact={true} element={<Home/>}></Route>
-            <Route path="/blog" element={<Blog/>}></Route>
-            <Route path="/checkout" element={<CheckoutForm/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/register" element={<Register/>}></Route>
+            <Route path="/shop" element={<Shop isLogin={isLogin} />}></Route>
+            <Route path="/checkout" element={<CheckoutForm isLogin={isLogin}/>}></Route>
+            <Route path="/login" element={<Login setIsLogin={setIsLogin} isLogin={isLogin}/>}></Route>
+            <Route path="/register" element={<Register isLogin={isLogin}/>}></Route>
             <Route path="/cart" element={<Cart/>}></Route>
+            <Route path="/blog" element={<Blog/>}></Route>
             <Route path="/product/:productId" element={<ProductDetail/>}></Route>
             <Route path="*" element={<PageNotFound/>}></Route>
         </Routes>
