@@ -1,75 +1,95 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, fetchProducts, fetchByCategoryProducts } from "../services/actions/actions";
+import { addToCart } from "../services/actions/actions";
 import ProductCard from "../components/ProductCard";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getCategories } from "../services/reducers/CategoriesSlice";
+import { getProducts } from "../services/reducers/productsSlice";
 
-const Shop = ({isLogin}) => {
+const Shop = () => {
     
-    const [categories,setCategories] = useState([]);
-    const [loading,setLoading] = useState(false);
-
     const dispatch = useDispatch();
     const onAddToCart = (product) =>{
         dispatch(addToCart(product)); //dispatch action addTocart
     }
 
-    const onChangeFilter = (event) =>{
-        dispatch(fetchByCategoryProducts(event.target.value));
+    // const onAddToWishlist = (product) =>{
+    //     dispatch(addToWishlist(product)); //dispatch action addTocart
+    // }
+
+    const onChangeCat = (event) =>{
+        dispatch(getProducts(event.target.value));
     }
 
+    const onChangeSort = (event) =>{
+        dispatch(getProducts(event.target.value));
+    }
+    
+    const authUser = JSON.parse(localStorage.getItem('persist:persist-root'));
+    //console.log(authUser);
+
+    const {userInfo,success} = useSelector((state) => state.authUser);
+    const navigate = useNavigate();
     useEffect(()=> {
-        //console.log('load page');
-        setLoading(true);
-        dispatch(fetchProducts()); //dispatch action onload page 
-        setLoading(false);
-        getCategories();
+        if (userInfo) {
+            dispatch(getProducts('')); //dispatch action onload page 
+            dispatch(getCategories()); //dispatch action onload page 
+        }else{
+            navigate('/login')
+        }
     },[])
 
-    const getCategories =  async () => {
-        const url = 'https://fakestoreapi.com/products/categories';
-        try {
-            const response = await fetch(url);
-            const json = await response.json();
-            //console.log(json);
-            setCategories(json);
-        } catch (e) {
-            console.log("error handling");
-        }
-    }
-    const products = useSelector((state) => state.products);
-    const authUser = useSelector((state) => state.authUser);
-    console.log('author',authUser);
-        if (!isLogin) {
+    const {products, loading } = useSelector((state) => state.products);
+    const categories = useSelector((state) => state.categories.categories);
+
+        if (!userInfo) {
             return <Navigate replace to="/login" />;
         } else {
             return(
                 <>
+                <section className="wrappper">
                     <div className="container">
-                        <div className="row filters-row">
+                        <div className="row">
                             <div className="filters">
                                 <div className="filter-box">
+                                    {/* Loading */}
+                                    {categories.loading ? (
+                                        <div>Loading ...</div>
+                                    ) : null}
                                     {categories.length ?
                                     <select 
                                     className="form-control"
-                                    onChange={onChangeFilter}>
-                                        <option>--Select Category--</option>
+                                    onChange={onChangeCat}>
+                                        <option value=''>--Select Category--</option>
                                         {categories.map((category,i) => {
                                             return <option key={i} value={category}>{category.toUpperCase()}</option>
                                         })}
                                     </select>:''}
                                 </div>
+                                <div className="filter-box">
+                                    <select 
+                                    className="form-control"
+                                    onChange={onChangeSort}>
+                                        <option value=''>--Sort Order--</option>
+                                        <option value="asc">ASC</option>
+                                        <option value="desc">DESC</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div className="row products">
-                                {loading?<div id="overlay">
-                                <div id="progstat">Loading ...</div>
-                                </div>:''}
-                                {products?.map((product) => {  
-                                return <ProductCard product={product} key={product.id} onAddToCart={onAddToCart} />
+                            {loading?<div id="overlay">
+                            <div id="progstat">Loading ...</div>
+                            </div>:''}
+                            {products?.map((product) => {  
+                            return <ProductCard 
+                            product={product} 
+                            key={product.id} 
+                            onAddToCart={onAddToCart}/>
                             })}
                         </div>
                     </div>
+                </section>
                 </>
         )
     }

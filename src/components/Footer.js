@@ -11,7 +11,7 @@ export default function Footer() {
                         <div className="col-md-3 col-lg-4 col-xl-3">
                             <div className="mt-4">
                                 <Link 
-                                className="navbar-brand" to="/">CODE<span className='logotext'>ZEE</span></Link>
+                                className="navbar-brand" to="/">Code<span className='logotext'>ZEE</span></Link>
                             </div>
                             <p>
                                 Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -20,14 +20,32 @@ export default function Footer() {
                         </div>
 
                         <div className="col-md-4 col-lg-3 col-xl-3">
-                            <h6 className="text-uppercase fw-bold mb-4 mt-4">Contact</h6>
+                            <h5 className="fw-bold mb-4 mt-4" style={{color: 'white'}}>Contact</h5>
                             <p><i className="fa fa-home me-3"></i> New York, NY 10012, US</p>
                             <p>
                                 <i className="fa fa-envelope me-3"></i>
                                 info@example.com
                             </p>
-                            <p><i className="fa fa-phone me-3"></i> + 01 234 567 88</p>
-                            <p><i className="fa fa-print me-3"></i> + 01 234 567 89</p>
+                            <p><i className="fa fa-phone me-3"></i> + 01234 56788</p>
+                        </div>
+                        <div className="col-md-4 col-lg-3 col-xl-3">
+                            <h5 className="fw-bold mb-4 mt-4" style={{color: 'white'}}>Social Media</h5>
+                            <div className="media-wrap">
+                                <ul className="social-media">
+                                    <li><Link 
+                                    to="http://facebook.com">
+                                    <i className="fa fa-facebook"></i></Link></li>
+                                    <li><Link 
+                                    to="http://instagram.com">
+                                    <i className="fa fa-instagram"></i></Link></li>
+                                    <li><Link 
+                                    to="http://twitter.com">
+                                    <i className="fa fa-twitter"></i></Link></li>
+                                    <li><Link 
+                                    to="http://youtube.com">
+                                    <i className="fa fa-youtube"></i></Link></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
