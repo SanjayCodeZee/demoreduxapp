@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, NavLink,Navigate  } from 'react-router-dom';
-import Home from '../pages/Home';
-import Blog from './Blog';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import Banner from './Banner';
-import CheckoutForm from '../pages/CheckoutForm';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProductDetail from '../pages/ProductDetail';
-import Cart from '../pages/Cart';
-import Footer from './Footer';
-import Shop from '../pages/Shop';
+import { useDispatch } from "react-redux";
+import { logout } from "../services/reducers/authSlice";
 
 const Navbar = () => {
-    const cartItems = useSelector((state) => state.cartItems.cartproducts);
-    const authUser = useSelector((state) => state.authUser);
-    console.log('author',authUser);
-    const [isLogin, setIsLogin] = useState(localStorage.getItem("authenticated") || false);
+    const {numberCart} = useSelector((state) => state.cartItems);
+    const {userInfo} = useSelector((state) => state.authUser);
+    //console.log('author',userInfo);
+    const dispatch = useDispatch();
 
     return (
-        <BrowserRouter>
+        <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
-                <Link className="navbar-brand" to="/">CODE<span className='logotext'>ZEE</span></Link>
+                <Link className="navbar-brand" to="/">
+                <i className="fa fa-shopping-bag" aria-hidden="true"></i>Code<span className='logotext'>ZEE</span></Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
@@ -33,52 +26,52 @@ const Navbar = () => {
                             <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                            <NavLink className="nav-link" to="/shop">Shop</NavLink>
+                            <NavLink className="nav-link" aria-current="page" to="/todoList">TodoList</NavLink>
                             </li>
                             <li className="nav-item">
-                            {!isLogin ?
-                            <NavLink className="nav-link" to="/login">Login</NavLink>:
-                            <NavLink className="nav-link" to="/login">Logout</NavLink>}
+                            <NavLink className="nav-link" aria-current="page" to="/contact">Contact</NavLink>
                             </li>
-                            {!isLogin?<li className="nav-item">
-                            <NavLink className="nav-link" to="/register">Register</NavLink>
-                            </li>:''}
+                            <li className="nav-item">
+                            <NavLink className="nav-link" to="/shop">Shop</NavLink>
+                                {/* <ul className="submenu">
+                                    <li><Link to="/cart">Profile</Link></li>
+                                    <li><Link to="/cart">Profile</Link></li>
+                                    <li><Link to="/cart">Profile</Link></li>
+                                    <li><Link to="/cart">Profile</Link></li>
+                                    <li><Link to="/cart">Profile</Link></li>
+                                </ul> */}
+                            </li>
                             <li className="nav-item">
                             <NavLink className="nav-link" to="/cart">
-                                <i className="fa fa-shopping-basket">
-                                {cartItems.length > 0 ? 
-                                <span className='badge cart-badge' id="lblCartCount">{cartItems.length}</span>:''}
+                                <i className="fa fa-shopping-bag" aria-hidden="true">
+                                <span className='badge cart-badge' id="lblCartCount">{numberCart}</span>
                                 </i>                                
                             </NavLink>
+                            </li>
+                            {!userInfo?
+                            <li className='nav-item'>
+                            <NavLink className="nav-link" to="/register">
+                            <i className="fa fa-user-plus" aria-hidden="true"></i> Register</NavLink>
+                            </li>:''}
+                            <li className="nav-item">
+                            {!userInfo?
+                            <NavLink className="nav-link" to="/login">
+                            <i className="fa fa-user" aria-hidden="true"></i> Login</NavLink>:
+                            <NavLink 
+                            onClick={()=> dispatch(logout()) }
+                            className="nav-link" 
+                            to="/login"
+                            ><i className="fa fa-sign-out" aria-hidden="true"></i> Logout</NavLink>}
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
-        <Banner/>
-        <Routes>
-            <Route path="/" exact={true} element={<Home/>}></Route>
-            <Route path="/shop" element={<Shop isLogin={isLogin} />}></Route>
-            <Route path="/checkout" element={<CheckoutForm isLogin={isLogin}/>}></Route>
-            <Route path="/login" element={<Login setIsLogin={setIsLogin} isLogin={isLogin}/>}></Route>
-            <Route path="/register" element={<Register isLogin={isLogin}/>}></Route>
-            <Route path="/cart" element={<Cart/>}></Route>
-            <Route path="/blog" element={<Blog/>}></Route>
-            <Route path="/product/:productId" element={<ProductDetail/>}></Route>
-            <Route path="*" element={<PageNotFound/>}></Route>
-        </Routes>
-        <Footer/>
-        </BrowserRouter>
+        </>
         
     );
 }
 
-function PageNotFound() {
-    return (<div>
-      <h1>404 Page</h1>
-      <p>This is Not found</p>
-    </div>)
-  }
 
 export default Navbar;

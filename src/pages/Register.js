@@ -58,170 +58,171 @@ export default function Register({isLogin}) {
                     userList.push(values); 
                     console.log("userList ", userList);
                     localStorage.setItem("userlists",JSON.stringify(userList));
-                    localStorage.setItem('authenticated',true);
-                    resetForm({values: ''});
+                    //resetForm({values: ''});
                     navigate('/shop'); // redirect to /shop
                 }
             }
             >
             {({ values, errors, handleSubmit, handleChange, touched, setFieldValue })=> (
-                <div className="container">
-                    {/* { console.log('value',values,'error',errors)} */}
-                    <div className="row contact">
-                        <Form onSubmit={handleSubmit}> 
-                            <div className="row">
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="fullname">Full Name</label>
-                                    <input type="text"
-                                    name="fullname" 
-                                    value={values.fullname}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Enter fullname"/>
-                                    <ErrorMessage name="fullname" component="span" style={{color:'red'}} />
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="phone">Phone</label>
-                                    <input type="number"
-                                    name="phone" 
-                                    value={values.phone}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Enter phone"/>
-                                    <ErrorMessage name="phone" component="span" style={{color:'red'}} />
-                                </div>
-                            </div>
-                            <div className="row">                                
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="date">Birth Date</label>
-                                    <input type="date"
-                                    name="date" 
-                                    value={values.date}
-                                    onChange={handleChange}
-                                    className="form-control"/>
-                                    <ErrorMessage name="date" component="span" style={{color:'red'}} />
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="qualification">Qualification</label>
-                                    <select 
-                                    name="qualification" 
-                                    value={values.qualification}
-                                    onChange={handleChange}
-                                    className="form-control">
-                                        <option value="">--select--</option>
-                                        <option value="mba">MBA</option>
-                                        <option value="mca">MCA</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    <ErrorMessage name="qualification" component="span" style={{color:'red'}} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="email">Email address</label>
-                                    <input type="email"
-                                    name="email" 
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    autoComplete="off"
-                                    placeholder="Enter email"/>
-                                    <ErrorMessage name="email" component="span" style={{color:'red'}} />
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="password">Password</label>
-                                    <input type="password" 
-                                    name="password"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Password"/>
-                                    <ErrorMessage name="password" component="span" style={{color:'red'}} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group">
-                                    <label className="mb-2" htmlFor="about">About</label>
-                                    <textarea
-                                    name="about" 
-                                    value={values.about}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Enter about"/>
-                                    <ErrorMessage name="about" component="span" style={{color:'red'}} />
-                                </div>
-                            </div>
-                            <div className="row">
-                            <ErrorMessage name="social" component="span" style={{color:'red'}} />
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2">Facebook</label>
-                                    <input type="text"
-                                    name="social[0]" 
-                                    value={values.social[0]}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Enter Facebook Url"/>
-                                    <ErrorMessage name="social.0" component="span" style={{color:'red'}} />
-                                    </div>
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2">LinkedIn</label>
-                                    <input type="text"
-                                    name="social[1]" 
-                                    value={values.social[1]}
-                                    onChange={handleChange}
-                                    className="form-control"
-                                    placeholder="Enter LinkedIn Url"/>
-                                    <ErrorMessage name="social.1" component="span" style={{color:'red'}} />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-6">
-                                    <label className="mb-2" htmlFor="gender">Gender : </label>
-                                    <div className="btn-radio">
-                                        <input type="radio"
-                                        name="gender" 
-                                        value="male"
+                <section className="wrappper">
+                    <div className="container">
+                        {/* { console.log('value',values,'error',errors)} */}
+                        <div className="row contact">
+                            <Form onSubmit={handleSubmit}> 
+                                <div className="row">
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="fullname">Full Name</label>
+                                        <input type="text"
+                                        name="fullname" 
+                                        value={values.fullname}
                                         onChange={handleChange}
-                                        checked={values.gender === "male"}/>
-                                        <label>Male</label>
+                                        className="form-control"
+                                        placeholder="Enter fullname"/>
+                                        <ErrorMessage name="fullname" component="span" style={{color:'red'}} />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="phone">Phone</label>
+                                        <input type="number"
+                                        name="phone" 
+                                        value={values.phone}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter phone"/>
+                                        <ErrorMessage name="phone" component="span" style={{color:'red'}} />
+                                    </div>
+                                </div>
+                                <div className="row">                                
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="date">Birth Date</label>
+                                        <input type="date"
+                                        name="date" 
+                                        value={values.date}
+                                        onChange={handleChange}
+                                        className="form-control"/>
+                                        <ErrorMessage name="date" component="span" style={{color:'red'}} />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="qualification">Qualification</label>
+                                        <select 
+                                        name="qualification" 
+                                        value={values.qualification}
+                                        onChange={handleChange}
+                                        className="form-control">
+                                            <option value="">--select--</option>
+                                            <option value="mba">MBA</option>
+                                            <option value="mca">MCA</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <ErrorMessage name="qualification" component="span" style={{color:'red'}} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="email">Email address</label>
+                                        <input type="email"
+                                        name="email" 
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        autoComplete="off"
+                                        placeholder="Enter email"/>
+                                        <ErrorMessage name="email" component="span" style={{color:'red'}} />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="password">Password</label>
+                                        <input type="password" 
+                                        name="password"
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Password"/>
+                                        <ErrorMessage name="password" component="span" style={{color:'red'}} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group">
+                                        <label className="mb-2" htmlFor="about">About</label>
+                                        <textarea
+                                        name="about" 
+                                        value={values.about}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter about"/>
+                                        <ErrorMessage name="about" component="span" style={{color:'red'}} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                <ErrorMessage name="social" component="span" style={{color:'red'}} />
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2">Facebook</label>
+                                        <input type="text"
+                                        name="social[0]" 
+                                        value={values.social[0]}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter Facebook Url"/>
+                                        <ErrorMessage name="social.0" component="span" style={{color:'red'}} />
+                                        </div>
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2">LinkedIn</label>
+                                        <input type="text"
+                                        name="social[1]" 
+                                        value={values.social[1]}
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter LinkedIn Url"/>
+                                        <ErrorMessage name="social.1" component="span" style={{color:'red'}} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group col-md-6">
+                                        <label className="mb-2" htmlFor="gender">Gender : </label>
+                                        <div className="btn-radio">
+                                            <input type="radio"
+                                            name="gender" 
+                                            value="male"
+                                            onChange={handleChange}
+                                            checked={values.gender === "male"}/>
+                                            <label>Male</label>
 
-                                        <input type="radio"
-                                        name="gender" 
-                                        value="female"
-                                        onChange={handleChange}
-                                        checked={values.gender === "female"}/>
-                                        <label>Female</label>
-                                        <ErrorMessage name="gender" component="span" style={{color:'red'}} />
+                                            <input type="radio"
+                                            name="gender" 
+                                            value="female"
+                                            onChange={handleChange}
+                                            checked={values.gender === "female"}/>
+                                            <label>Female</label>
+                                            <ErrorMessage name="gender" component="span" style={{color:'red'}} />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="profileimage" className="mb-3">Profile Image</label>
-                                <div className="input-file">
-                                    <input type="file"
-                                    name="profileimage"
-                                    onChange={(event) => {
-                                        setFieldValue("profileimage", event.currentTarget.files[0]);
-                                    }}/>
-                                    {values.profileimage ? (
-                                        <PreviewImage className={{margin:'auto'}} width={100} height={100} file={values.profileimage} />
-                                    ) : null}
-                                    <ErrorMessage name="profileimage" component="span" style={{color:'red'}} />
+                                <div className="form-group">
+                                    <label htmlFor="profileimage" className="mb-3">Profile Image</label>
+                                    <div className="input-file">
+                                        <input type="file"
+                                        name="profileimage"
+                                        onChange={(event) => {
+                                            setFieldValue("profileimage", event.currentTarget.files[0]);
+                                        }}/>
+                                        {values.profileimage ? (
+                                            <PreviewImage className={{margin:'auto'}} width={100} height={100} file={values.profileimage} />
+                                        ) : null}
+                                        <ErrorMessage name="profileimage" component="span" style={{color:'red'}} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="acceptbox">
-                                <input type="checkbox" 
-                                name="acceptbox"
-                                value="yes"
-                                onChange={handleChange}/> I accept Terms & conditions </label>
-                                <ErrorMessage name="acceptbox" component="p" style={{color:'red'}} />
-                            </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                        </Form>
-                        <div className="row"><Link to="/login" className="link-form">Already Account Login Here</Link></div>
+                                <div className="form-group checkbox">
+                                    <label htmlFor="acceptbox">
+                                    <input type="checkbox" 
+                                    name="acceptbox"
+                                    value="yes"
+                                    onChange={handleChange}/> I accept Terms & conditions </label>
+                                    <ErrorMessage name="acceptbox" component="p" style={{color:'red'}} />
+                                </div>
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </Form>
+                            <div className="row"><Link to="/login" className="link-form">Already Account Login Here</Link></div>
+                        </div>
                     </div>
-                </div>
+                </section>
                 )}
             </Formik>
         );
